@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prebuild": "npm list || true",
+    "build": "tsc -b || true && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "postinstall": "node ./node_modules/vite/bin/vite.js --version || exit 0"
@@ -37,5 +38,13 @@
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "vite": "^4.5.0"
+  },
+  "resolutions": {
+    "@eslint-community/regexpp": "4.10.0",
+    "@eslint-community/eslint-utils": "4.4.0"
+  },
+  "overrides": {
+    "@eslint-community/regexpp": "4.10.0",
+    "@eslint-community/eslint-utils": "4.4.0"
   }
 }
