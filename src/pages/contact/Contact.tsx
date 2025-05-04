@@ -125,8 +125,30 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    // Send form data to FormSubmit.co
+    fetch('https://formsubmit.co/ajax/faizan.faruqui@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phone || 'Not provided',
+        company: formState.company || 'Not provided',
+        service: formState.service || 'Not specified',
+        message: formState.message,
+        _subject: `New Contact Form Submission from ${formState.name}`,
+        _template: "table",
+        _autoresponse: "Thank you for contacting Dingzz. We've received your message and will get back to you shortly.",
+        _captcha: "true",
+        _cc: "faizan.faruqui@gmail.com"
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormState({
@@ -137,7 +159,12 @@ const Contact = () => {
         service: '',
         message: ''
       });
-    }, 1500);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      setIsSubmitting(false);
+      alert('There was an error submitting the form. Please try again later.');
+    });
   };
   
   return (
@@ -363,6 +390,13 @@ const Contact = () => {
                         ></textarea>
                       </div>
                     </div>
+                    
+                    {/* Hidden FormSubmit.co configuration fields */}
+                    <input type="hidden" name="_subject" value="New Contact Form Submission" />
+                    <input type="hidden" name="_template" value="table" />
+                    <input type="hidden" name="_autoresponse" value="Thank you for contacting Dingzz. We've received your message and will get back to you shortly." />
+                    <input type="hidden" name="_captcha" value="true" />
+                    <input type="hidden" name="_cc" value="faizan.faruqui@gmail.com" />
                     
                     <div className="mt-8">
                       <button 
