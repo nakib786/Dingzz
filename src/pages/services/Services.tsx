@@ -25,7 +25,7 @@ const Services = () => {
       <BackgroundPaths />
       
       {/* Page Header */}
-      <section className="bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 py-16 md:py-24 relative overflow-hidden">
+      <section className={`bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 py-${isMobile ? '12' : '16'} md:py-24 relative overflow-hidden`}>
         <div className="absolute inset-0 opacity-20 dark:opacity-30" style={{ backgroundImage: "url('https://placehold.co/1920x1080/e4e4e7/4f46e5?text=&font=montserrat')", backgroundSize: 'cover' }}></div>
         <div className="container-custom relative z-10">
           <motion.div 
