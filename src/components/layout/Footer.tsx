@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import DingzzMarketingLogo from '../ui/DingzzMarketingLogo';
+import DingzzPngLogo from '../ui/DingzzPngLogo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-4">
             <div className="mb-6">
-              <DingzzMarketingLogo height={80} width={240} color="#FFFFFF" />
+              <DingzzPngLogo height={80} width={240} className="brightness-0 invert" />
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
               Your trusted partner for innovative digital and local marketing solutions that drive real results.

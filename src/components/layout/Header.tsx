@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import DingzzMarketingLogo from '../ui/DingzzMarketingLogo';
+import DingzzPngLogo from '../ui/DingzzPngLogo';
 import ThemeToggle from '../ui/ThemeToggle';
 import { Menu, MenuItem, HoveredLink, ProductItem } from '../ui/NavbarMenu';
 
@@ -77,7 +77,9 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <DingzzMarketingLogo height={60} width={180} className="md:h-[80px] md:w-[240px]" />
+            <div className="dark:bg-white dark:rounded-lg dark:p-2 animate-pulse hover:animate-bounce">
+              <DingzzPngLogo height={50} width={150} className="brightness-150 md:h-[100px] md:w-[300px]" />
+            </div>
           </Link>
           
           {/* Desktop navigation with Aceternity Navbar Menu */}
