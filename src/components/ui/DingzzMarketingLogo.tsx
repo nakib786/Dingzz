@@ -9,8 +9,8 @@ interface DingzzMarketingLogoProps {
 
 const DingzzMarketingLogo: React.FC<DingzzMarketingLogoProps> = ({ 
   className = '', 
-  height = 70, 
-  width = 200,
+  height = 80, 
+  width = 240,
   color = '#4F46E5' 
 }) => {
   return (

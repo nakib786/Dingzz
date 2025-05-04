@@ -77,7 +77,7 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <DingzzMarketingLogo height={40} width={120} className="md:h-[60px] md:w-[180px]" />
+            <DingzzMarketingLogo height={60} width={180} className="md:h-[80px] md:w-[240px]" />
           </Link>
           
           {/* Desktop navigation with Aceternity Navbar Menu */}
@@ -99,30 +99,26 @@ const Header = () => {
                     <div className="text-sm font-medium">All Services</div>
                     <div className="text-xs text-neutral-500">Browse our complete catalog</div>
                   </HoveredLink>
-                  <HoveredLink to="/services/web-development">
-                    <div className="text-sm font-medium">Web Development</div>
-                    <div className="text-xs text-neutral-500">Website & web app solutions</div>
+                  <HoveredLink to="/services/digital-marketing">
+                    <div className="text-sm font-medium">Digital Marketing</div>
+                    <div className="text-xs text-neutral-500">SEO, PPC & Social Media</div>
                   </HoveredLink>
-                  <HoveredLink to="/services/mobile-development">
-                    <div className="text-sm font-medium">Mobile Development</div>
-                    <div className="text-xs text-neutral-500">iOS & Android apps</div>
+                  <HoveredLink to="/services/content-marketing">
+                    <div className="text-sm font-medium">Content Marketing</div>
+                    <div className="text-xs text-neutral-500">Blog, Video & Social Content</div>
                   </HoveredLink>
-                  <HoveredLink to="/services/ui-ux-design">
-                    <div className="text-sm font-medium">UI/UX Design</div>
-                    <div className="text-xs text-neutral-500">Interface & experience design</div>
+                  <HoveredLink to="/services/local-marketing">
+                    <div className="text-sm font-medium">Local Marketing</div>
+                    <div className="text-xs text-neutral-500">Local SEO & Visibility</div>
                   </HoveredLink>
                 </div>
               </MenuItem>
               <MenuItem setActive={setActive} active={active} item="About">
                 <div className="w-96 p-2">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <HoveredLink to="/about">
                       <div className="text-sm font-medium">About Us</div>
                       <div className="text-xs text-neutral-500">Our story and mission</div>
-                    </HoveredLink>
-                    <HoveredLink to="/about/team">
-                      <div className="text-sm font-medium">Our Team</div>
-                      <div className="text-xs text-neutral-500">Meet the people behind Dingzz Marketing</div>
                     </HoveredLink>
                   </div>
                 </div>
@@ -131,7 +127,7 @@ const Header = () => {
                 <div className="w-96 p-2">
                   <HoveredLink to="/contact">
                     <div className="text-sm font-medium">Contact Us</div>
-                    <div className="text-xs text-neutral-500">Get in touch with our team</div>
+                    <div className="text-xs text-neutral-500">Get in touch with us</div>
                   </HoveredLink>
                 </div>
               </MenuItem>
@@ -230,9 +226,9 @@ const Header = () => {
                     <h3 className="text-sm uppercase text-gray-500 dark:text-gray-400 font-medium mb-3 px-4">Services</h3>
                     <div className="flex flex-col space-y-1">
                       {[
-                        { path: '/services/web-development', label: 'Web Development' },
-                        { path: '/services/mobile-development', label: 'Mobile Development' },
-                        { path: '/services/ui-ux-design', label: 'UI/UX Design' }
+                        { path: '/services/digital-marketing', label: 'Digital Marketing' },
+                        { path: '/services/local-marketing', label: 'Local Marketing' },
+                        { path: '/services/content-marketing', label: 'Content Marketing' }
                       ].map(({ path, label }) => (
                         <Link 
                           key={path}

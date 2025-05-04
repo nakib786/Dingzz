@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BackgroundPaths } from '../../components/ui/background-paths';
+import { BackgroundImage } from '../../components/ui/BackgroundImage';
 import { useEffect, useState } from 'react';
 
 const About = () => {
@@ -26,7 +27,13 @@ const About = () => {
       
       {/* Page Header */}
       <section className={`bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 py-${isMobile ? '12' : '16'} md:py-24 relative overflow-hidden`}>
-        <div className="absolute inset-0 opacity-20 dark:opacity-30" style={{ backgroundImage: "url('https://placehold.co/1920x1080/e4e4e7/4f46e5?text=&font=montserrat')", backgroundSize: 'cover' }}></div>
+        <BackgroundImage 
+          imagePath="/images/backgrounds/abstract-tech-3.svg"
+          glowColor="rgba(16, 185, 129, 0.6)"
+          glowOpacity={0.5}
+          glowSize="lg"
+          overlayOpacity={0.3}
+        />
         <div className="container-custom relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -59,7 +66,7 @@ const About = () => {
                 Founded in 2018, Dingzz Marketing began with a simple mission: to help local businesses thrive in an increasingly digital world. We recognized that many small and medium-sized businesses were struggling to navigate the complex landscape of digital marketing while maintaining their local presence.
               </p>
               <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm md:text-base">
-                Our team of marketing experts and tech enthusiasts came together with a shared vision of bridging the gap between digital and local marketing strategies. We believe that businesses shouldn't have to choose between a strong online presence and local community engagement.
+                Our marketing experts and tech enthusiasts came together with a shared vision of bridging the gap between digital and local marketing strategies. We believe that businesses shouldn't have to choose between a strong online presence and local community engagement.
               </p>
               <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                 Today, we're proud to have helped hundreds of businesses across various industries grow their customer base, increase revenue, and establish a strong brand presence both online and in their local communities.
@@ -135,72 +142,6 @@ const About = () => {
                 <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                   {value.description}
                 </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Our Team */}
-      <section className="py-16 md:py-24 bg-white dark:bg-gray-900 relative z-10">
-        <div className="container-custom">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 px-4"
-          >
-            <span className="inline-block py-1 px-3 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-primary text-xs md:text-sm font-medium mb-4">Meet Our Experts</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">Our Team</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-              Meet the talented professionals behind Dingzz Marketing who are dedicated to helping your business succeed.
-            </p>
-          </motion.div>
-          
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 sm:px-2">
-            {[
-              {
-                image: "https://placehold.co/400x400/e4e4e7/4f46e5?text=CEO&font=montserrat",
-                name: "Sarah Johnson",
-                position: "CEO & Founder",
-                description: "With over 15 years of experience in digital marketing, Sarah leads our team with vision and expertise."
-              },
-              {
-                image: "https://placehold.co/400x400/e4e4e7/4f46e5?text=CMO&font=montserrat",
-                name: "Michael Chen",
-                position: "Chief Marketing Officer",
-                description: "Michael brings creative strategies and data-driven insights to help our clients achieve their marketing goals."
-              },
-              {
-                image: "https://placehold.co/400x400/e4e4e7/4f46e5?text=CTO&font=montserrat",
-                name: "Emily Rodriguez",
-                position: "Chief Technology Officer",
-                description: "Emily ensures our technical solutions are cutting-edge and aligned with the latest digital trends."
-              }
-            ].map((member, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-soft border border-gray-100 dark:border-gray-700 transition-all duration-300"
-              >
-                <div className="mb-6 mx-auto w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-indigo-100 dark:border-indigo-900/30">
-                  <img 
-                    src={member.image}
-                    alt={member.name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{member.name}</h3>
-                  <p className="text-primary dark:text-indigo-400 font-medium mb-3">{member.position}</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-                    {member.description}
-                  </p>
-                </div>
               </motion.div>
             ))}
           </div>

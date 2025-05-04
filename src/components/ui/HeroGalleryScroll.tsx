@@ -78,17 +78,30 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
   );
 
   return (
-    <div
-      ref={ref}
-      className={`${isMobile ? 'h-auto pb-24' : 'h-[300vh]'} pt-10 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]`}
+    <div 
+      ref={ref} 
+      style={{
+        position: 'relative',
+        zIndex: 0
+      }}
+      className={`${isMobile ? 'h-auto pb-24' : 'h-[300vh]'} pt-10 md:py-40 overflow-hidden antialiased flex flex-col [perspective:1000px]`}
     >
-      <HeroHeader isMobile={isMobile} />
+      {/* Hero header with higher z-index to ensure buttons are clickable */}
+      <div className="absolute top-0 left-0 w-full z-50" style={{ pointerEvents: 'auto' }}>
+        <HeroHeader isMobile={isMobile} />
+      </div>
+      
+      {/* Gallery motion elements with lower z-index */}
       <motion.div
         style={{
-          rotateX: isMobile ? rotateX : rotateX,
-          rotateZ: isMobile ? rotateZ : rotateZ,
-          translateY: isMobile ? translateY : translateY,
+          rotateX,
+          rotateZ,
+          translateY,
           opacity,
+          position: 'relative',
+          zIndex: 0,
+          pointerEvents: 'none',
+          marginTop: isMobile ? '200px' : '400px'
         }}
         className="relative"
       >
@@ -129,26 +142,26 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
 
 const HeroHeader = ({ isMobile }: { isMobile: boolean }) => {
   return (
-    <div className={`max-w-7xl relative mx-auto ${isMobile ? 'py-6 mb-10' : 'py-10 md:py-20 lg:py-40'} px-4 w-full left-0 top-0`}>
+    <div className={`max-w-7xl relative mx-auto ${isMobile ? 'py-6 mb-10' : 'py-10 md:py-20 lg:py-40'} px-4 w-full left-0 top-0 z-20`}>
       <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-gray-900 dark:text-gray-100">
         Transform Your <br className="hidden sm:block" /> Digital Presence
       </h1>
       <p className={`max-w-2xl text-base md:text-xl ${isMobile ? 'mt-2' : 'mt-4 md:mt-8'} text-gray-600 dark:text-gray-400`}>
         Innovative marketing solutions crafted to elevate your brand, expand your reach, and drive meaningful growth.
       </p>
-      <div className={`flex flex-wrap gap-4 ${isMobile ? 'mt-4' : 'mt-6 md:mt-8'}`}>
-        <Link 
-          to="/services" 
-          className="bg-indigo-600 text-white hover:bg-indigo-700 font-medium shadow-sm px-4 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
+      <div className={`flex flex-wrap gap-4 ${isMobile ? 'mt-4' : 'mt-6 md:mt-8'} relative`} style={{ zIndex: 100, pointerEvents: 'auto' }}>
+        <a 
+          href="/services" 
+          className="bg-indigo-600 text-white hover:bg-indigo-700 font-medium shadow-md px-4 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base cursor-pointer"
         >
           Explore Services
-        </Link>
-        <Link 
-          to="/contact" 
-          className="border border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 hover:bg-indigo-600/10 dark:hover:bg-indigo-900/20 font-medium px-4 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
+        </a>
+        <a 
+          href="/contact" 
+          className="border-2 border-indigo-600 bg-white text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 hover:bg-indigo-600/10 dark:hover:bg-indigo-900/20 font-medium px-4 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base cursor-pointer"
         >
           Contact Us
-        </Link>
+        </a>
       </div>
     </div>
   );
@@ -207,9 +220,9 @@ export const galleryItems: GalleryItem[] = [
     thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
   },
   {
-    title: "Web Development",
-    link: "/services/web-development",
-    thumbnail: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1164&q=80",
+    title: "Local Marketing",
+    link: "/services/local-marketing",
+    thumbnail: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?q=80&w=2670&auto=format&fit=crop",
   },
   {
     title: "SEO Optimization",
@@ -247,14 +260,14 @@ export const galleryItems: GalleryItem[] = [
     thumbnail: "https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
-    title: "UI/UX Design",
-    link: "/services/design",
+    title: "Branding & Identity",
+    link: "/services/branding",
     thumbnail: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
-    title: "Mobile App Development",
-    link: "/services/mobile",
-    thumbnail: "https://images.unsplash.com/photo-1596742578443-7682ef7b7057?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80",
+    title: "Social Media Advertising",
+    link: "/services/social-ads",
+    thumbnail: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80",
   },
   {
     title: "Video Production",

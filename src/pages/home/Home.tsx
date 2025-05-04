@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BackgroundPaths } from '../../components/ui/background-paths';
+import { BackgroundImage } from '../../components/ui/BackgroundImage';
 import { HeroGalleryScroll, galleryItems } from '../../components/ui/HeroGalleryScroll';
 import { useEffect, useState } from 'react';
 
@@ -27,7 +28,7 @@ const Home = () => {
       
       {/* Hero Section */}
       <HeroGalleryScroll items={galleryItems} />
-
+      
       {/* Services Overview */}
       <section className={`${isMobile ? '-mt-0' : 'pt-0'} pb-12 md:py-24 relative z-10 bg-white dark:bg-gray-900`}>
         <div className="container-custom">
@@ -58,9 +59,9 @@ const Home = () => {
                 description: "Targeted local strategies to connect with customers in your area and build community presence."
               },
               {
-                icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-                title: "Web Development",
-                description: "Custom-built websites and digital experiences that reflect your brand and drive results."
+                icon: "M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+                title: "Analytics & Reporting",
+                description: "Data-driven insights and performance tracking to optimize your marketing campaigns for better ROI."
               }
             ].map((service, index) => (
               <motion.div 
@@ -69,24 +70,95 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-soft border border-gray-100 dark:border-gray-700 transition-all duration-300"
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+                className="group relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 sm:p-8 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-700 transition-all duration-300"
               >
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                  <svg className="w-6 h-6 md:w-7 md:h-7 text-primary group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={service.icon} />
-                  </svg>
+                {/* Background decoration */}
+                <div className="absolute top-0 right-0 w-24 h-24 -mt-8 -mr-8 rounded-full bg-indigo-100/60 dark:bg-indigo-900/20 blur-2xl group-hover:bg-indigo-200/70 dark:group-hover:bg-indigo-800/30 transition-all duration-500"></div>
+                
+                {/* Service icon with animated background */}
+                <div className="relative">
+                  <motion.div 
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-5 md:mb-6 overflow-hidden z-10"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-indigo-600/20 dark:from-indigo-400/10 dark:to-indigo-500/20 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{ 
+                        backgroundPosition: ["0% 0%", "100% 100%"] 
+                      }}
+                      transition={{ 
+                        repeat: Infinity,
+                        repeatType: "mirror",
+                        duration: 3,
+                        ease: "linear" 
+                      }}
+                    />
+                    <svg className="w-7 h-7 md:w-8 md:h-8 text-primary group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={service.icon} />
+                    </svg>
+                  </motion.div>
                 </div>
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-gray-900 dark:text-white">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 md:mb-6 text-sm md:text-base">
+                
+                {/* Service content */}
+                <motion.h3 
+                  className="text-xl md:text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-indigo-400 transition-colors duration-300"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                >
+                  {service.title}
+                </motion.h3>
+                
+                <motion.p 
+                  className="text-gray-600 dark:text-gray-400 mb-5 md:mb-6 text-sm md:text-base"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                >
                   {service.description}
-                </p>
-                <Link to="/services" className="text-primary font-medium hover:text-indigo-700 dark:hover:text-indigo-400 inline-flex items-center transition-colors duration-200 text-sm md:text-base">
-                  Learn More
-                  <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
+                </motion.p>
+                
+                {/* Animated link */}
+                <motion.div
+                  whileHover={{ x: 3 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Link 
+                    to="/services" 
+                    className="text-primary font-medium hover:text-indigo-700 dark:hover:text-indigo-400 inline-flex items-center transition-colors duration-200 text-sm md:text-base"
+                  >
+                    Learn More
+                    <motion.svg 
+                      className="w-4 h-4 ml-1" 
+                      viewBox="0 0 20 20" 
+                      fill="currentColor"
+                      initial={{ x: 0 }}
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        repeatType: "loop", 
+                        duration: 2,
+                        repeatDelay: 1,
+                        ease: "easeInOut" 
+                      }}
+                    >
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </motion.svg>
+                  </Link>
+                </motion.div>
+                
+                {/* Border animation effect */}
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-indigo-400 to-indigo-600 dark:from-indigo-600 dark:to-indigo-400"
+                  initial={{ width: "0%" }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
               </motion.div>
             ))}
           </div>
@@ -122,7 +194,7 @@ const Home = () => {
               },
               {
                 title: "Industry Expertise",
-                description: "Our team brings years of experience across multiple industries and marketing disciplines."
+                description: "We bring years of experience across multiple industries and marketing disciplines."
               },
               {
                 title: "Transparent Reporting",
@@ -165,7 +237,16 @@ const Home = () => {
       {/* Call to Action */}
       <section className="py-12 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 opacity-95"></div>
-        <div className="absolute inset-0 opacity-20 dark:opacity-30" style={{ backgroundImage: "url('https://placehold.co/1920x1080/e4e4e7/4f46e5?text=&font=montserrat')", backgroundSize: 'cover' }}></div>
+        
+        {/* Replace placeholder with our new background image */}
+        <BackgroundImage 
+          imagePath="/images/backgrounds/abstract-tech-2.svg"
+          glowColor="rgba(79, 70, 229, 0.6)"
+          glowOpacity={0.5}
+          glowSize="md"
+          overlayOpacity={0.3}
+        />
+        
         <div className="container-custom relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}

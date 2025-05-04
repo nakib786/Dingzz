@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BackgroundPaths } from '../../components/ui/background-paths';
+import { BackgroundImage } from '../../components/ui/BackgroundImage';
 import { useEffect } from 'react';
 
 const Contact = () => {
@@ -16,6 +17,88 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  // Toggle FAQ accordion
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+  
+  // FAQ data
+  const faqData = [
+    {
+      category: "Services",
+      questions: [
+        {
+          question: "What marketing services do you offer?",
+          answer: "We offer a comprehensive range of marketing services including digital marketing (SEO, PPC, social media, email), local marketing, content creation, analytics & reporting, branding, and strategic planning. Each service can be tailored to your specific business needs and goals."
+        },
+        {
+          question: "How long until I see results from digital marketing?",
+          answer: "Results timeline varies depending on the strategies implemented. SEO typically takes 3-6 months to show significant results, while paid advertising can generate leads immediately. Social media marketing usually takes 1-3 months to build momentum. We'll provide realistic timelines based on your specific goals and industry."
+        },
+        {
+          question: "Do you offer monthly marketing packages?",
+          answer: "Yes, we offer flexible monthly marketing packages customized to your business needs and budget. Each package includes a combination of services designed to achieve your specific goals. We also offer one-time projects for specific needs like website design or brand development."
+        }
+      ]
+    },
+    {
+      category: "Working Process",
+      questions: [
+        {
+          question: "What does your onboarding process look like?",
+          answer: "Our onboarding process begins with a discovery meeting to understand your business, goals, and challenges. We then conduct research on your industry, competitors, and target audience. Next, we develop a customized marketing strategy, which we present to you for feedback. Once approved, we implement the strategy and provide regular updates on progress and results."
+        },
+        {
+          question: "How do you measure the success of marketing campaigns?",
+          answer: "We track key performance indicators (KPIs) specific to your goals, such as website traffic, conversion rates, lead generation, engagement metrics, and ROI. We provide transparent reporting through custom dashboards and regular strategy meetings to review performance and make data-driven adjustments."
+        },
+        {
+          question: "Do you work with clients outside your location?",
+          answer: "Absolutely! We serve clients throughout Canada and the United States. Our digital workflow and remote collaboration tools allow us to work effectively with businesses anywhere in North America. We conduct meetings via video conference, provide regular updates through our client portal, and deliver the same high-quality service regardless of your location."
+        },
+        {
+          question: "How often will we communicate during projects?",
+          answer: "Communication frequency depends on your preference and the project scope. Typically, we schedule weekly or bi-weekly check-ins for active campaigns, plus monthly strategy reviews. You'll have a dedicated account manager available for questions and emergencies. We use project management tools that give you 24/7 access to project updates."
+        }
+      ]
+    },
+    {
+      category: "Pricing & Contracts",
+      questions: [
+        {
+          question: "What is your pricing structure?",
+          answer: "Our pricing is tailored to the specific services you need and the scope of work required. We offer monthly retainers for ongoing services, project-based pricing for specific initiatives, and performance-based options for certain campaigns. During our initial consultation, we'll discuss your budget and provide transparent pricing options."
+        },
+        {
+          question: "Do I need to sign a long-term contract?",
+          answer: "While we recommend a minimum 3-month commitment for most marketing strategies to show meaningful results, we offer flexible contract terms. We have month-to-month options, 3-6 month agreements, and annual plans with preferred pricing. All contracts include clear termination clauses with 30-day notice periods."
+        },
+        {
+          question: "Are there any additional costs I should be aware of?",
+          answer: "Our proposals include all service fees, but third-party costs such as ad spend, premium tools, or specialized software may be additional. We're completely transparent about all potential costs upfront and will never incur additional expenses without your approval."
+        }
+      ]
+    },
+    {
+      category: "Technical",
+      questions: [
+        {
+          question: "Can you work with my existing website or do I need a new one?",
+          answer: "We can work with your existing website in most cases, making improvements to optimize for conversions and SEO. However, if your current site has significant technical issues or doesn't align with your marketing goals, we may recommend a redesign. We'll provide an honest assessment during our initial audit."
+        },
+        {
+          question: "Do you handle website hosting and maintenance?",
+          answer: "Yes, we offer website hosting, maintenance, and security services to ensure your site remains fast, secure, and up-to-date. This includes regular backups, security monitoring, plugin updates, and performance optimization. These services can be included in your marketing package or purchased separately."
+        },
+        {
+          question: "Can you integrate with my existing CRM or marketing tools?",
+          answer: "Absolutely! We work with most popular CRM and marketing platforms including HubSpot, Salesforce, Mailchimp, and many others. We can integrate these tools with your website and marketing campaigns to ensure seamless data flow and reporting. If you need recommendations for new tools, we can help with that too."
+        }
+      ]
+    }
+  ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -64,7 +147,13 @@ const Contact = () => {
       
       {/* Page Header */}
       <section className={`bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 py-${isMobile ? '12' : '16'} md:py-24 relative overflow-hidden`}>
-        <div className="absolute inset-0 opacity-20 dark:opacity-30" style={{ backgroundImage: "url('https://placehold.co/1920x1080/e4e4e7/4f46e5?text=&font=montserrat')", backgroundSize: 'cover' }}></div>
+        <BackgroundImage 
+          imagePath="/images/backgrounds/abstract-tech-1.svg"
+          glowColor="rgba(79, 70, 229, 0.5)"
+          glowOpacity={0.7}
+          glowSize="lg"
+          overlayOpacity={0.2}
+        />
         <div className="container-custom relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -74,7 +163,7 @@ const Contact = () => {
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Contact Us</h1>
             <p className="text-indigo-100 dark:text-indigo-50 max-w-2xl mx-auto text-sm md:text-lg">
-              Have questions or ready to start a project? Get in touch with our team today.
+              Have questions or ready to start a project? Get in touch with us today.
             </p>
           </motion.div>
         </div>
@@ -105,12 +194,12 @@ const Contact = () => {
                   {
                     icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z",
                     title: "Address",
-                    content: "123 Marketing Street\nDigital City, ST 12345"
+                    content: "Serving clients throughout\nCanada and the United States"
                   },
                   {
                     icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
                     title: "Phone",
-                    content: "+1 (555) 123-4567"
+                    content: "+1 (416) 123-4567"
                   },
                   {
                     icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
@@ -172,7 +261,7 @@ const Contact = () => {
                   </div>
                   <h3 className="text-xl font-bold text-green-800 dark:text-green-200 mb-2">Message Sent Successfully!</h3>
                   <p className="text-green-700 dark:text-green-300 text-sm md:text-base">
-                    Thank you for contacting us. Our team will get back to you shortly.
+                    Thank you for contacting us. We will get back to you shortly.
                   </p>
                 </div>
               ) : (
@@ -254,7 +343,7 @@ const Contact = () => {
                           <option value="Digital Marketing">Digital Marketing</option>
                           <option value="Local Marketing">Local Marketing</option>
                           <option value="Content Marketing">Content Marketing</option>
-                          <option value="Web Development">Web Development</option>
+                          <option value="Analytics & Reporting">Analytics & Reporting</option>
                           <option value="Other">Other</option>
                         </select>
                       </div>
@@ -317,10 +406,10 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 px-4"
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-secondary text-xs md:text-sm font-medium mb-4">Visit Us</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">Our Location</h2>
+            <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-secondary text-xs md:text-sm font-medium mb-4">Our Reach</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">Service Coverage</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-              We're conveniently located in the heart of Digital City. Stop by for a coffee and let's discuss your marketing needs.
+              We proudly serve clients throughout Canada and the United States. Our remote capabilities allow us to deliver exceptional marketing services no matter where you're located.
             </p>
           </motion.div>
           
@@ -332,8 +421,8 @@ const Contact = () => {
             className="px-4 rounded-xl overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700"
           >
             <iframe
-              title="Office Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d-73.9876!3d40.7654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDM0JzU2LjAiTiA3M8KwNTknMzQuMCJX!5e0!3m2!1sen!2sus!4v1234567890"
+              title="Service Coverage"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14890079.917369507!2d-98.5795846!3d45.3832159!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b0d03d337cc6ad9%3A0x9968b72aa2438fa5!2sCanada!5e0!3m2!1sen!2sus!4v1689853333214!5m2!1sen!2sus"
               width="100%"
               height="450"
               style={{ border: 0 }}
@@ -358,42 +447,116 @@ const Contact = () => {
             <span className="inline-block py-1 px-3 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-primary text-xs md:text-sm font-medium mb-4">Questions?</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">Frequently Asked Questions</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-              Here are some common questions we receive from potential clients. If you don't see your question here, feel free to contact us directly.
+              Find answers to common questions about our services, processes, and policies. 
+              If you don't see your question here, please contact us directly.
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 px-4 sm:px-2">
-            {[
-              {
-                question: "How long until I see results from digital marketing?",
-                answer: "Results timeline varies depending on the strategies implemented. SEO typically takes 3-6 months to show significant results, while paid advertising can generate leads immediately. We'll provide realistic timelines based on your specific goals."
-              },
-              {
-                question: "Do you offer monthly marketing packages?",
-                answer: "Yes, we offer flexible monthly marketing packages customized to your business needs and budget. Each package includes a combination of services designed to achieve your specific goals."
-              },
-              {
-                question: "Can you work with businesses outside of Digital City?",
-                answer: "Absolutely! While we're based in Digital City, we work with clients nationwide. Our digital capabilities allow us to serve clients regardless of location, though local businesses can benefit from in-person strategy sessions."
-              },
-              {
-                question: "How do you measure the success of marketing campaigns?",
-                answer: "We track key performance indicators (KPIs) specific to your goals, such as website traffic, conversion rates, lead generation, and ROI. We provide transparent reporting and regular updates on campaign performance."
-              }
-            ].map((faq, index) => (
+          <div className="max-w-4xl mx-auto px-4">
+            {faqData.map((category, categoryIndex) => (
               <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
+                key={categoryIndex}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-soft border border-gray-100 dark:border-gray-700 transition-all duration-300"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: categoryIndex * 0.1 }}
+                className="mb-8"
               >
-                <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 dark:text-white">{faq.question}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">{faq.answer}</p>
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                  {category.category}
+                </h3>
+                <div className="space-y-4">
+                  {category.questions.map((faq, faqIndex) => {
+                    const absoluteIndex = categoryIndex * 10 + faqIndex;
+                    const isOpen = openFaqIndex === absoluteIndex;
+                    
+                    return (
+                      <motion.div 
+                        key={faqIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: faqIndex * 0.05 }}
+                        className={`bg-white dark:bg-gray-800 rounded-xl border ${isOpen ? 'border-indigo-200 dark:border-indigo-800 shadow-md' : 'border-gray-100 dark:border-gray-700'} overflow-hidden transition-all duration-300`}
+                      >
+                        <button
+                          onClick={() => toggleFaq(absoluteIndex)}
+                          className="w-full flex justify-between items-center p-5 text-left focus:outline-none"
+                          aria-expanded={isOpen}
+                        >
+                          <span className="text-base md:text-lg font-medium text-gray-900 dark:text-white">
+                            {faq.question}
+                          </span>
+                          <motion.span
+                            animate={{ rotate: isOpen ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="ml-4 flex-shrink-0 bg-indigo-100 dark:bg-indigo-900/30 rounded-full p-1"
+                          >
+                            <svg className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </motion.span>
+                        </button>
+                        <motion.div
+                          initial={false}
+                          animate={{
+                            height: isOpen ? 'auto' : 0,
+                            opacity: isOpen ? 1 : 0
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="p-5 pt-0 border-t border-gray-100 dark:border-gray-700">
+                            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </motion.div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </motion.div>
             ))}
           </div>
+          
+          {/* Still have questions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-12 text-center bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl p-8 md:p-10 max-w-4xl mx-auto"
+          >
+            <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900 dark:text-white">Still have questions?</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-lg mx-auto">
+              Can't find the answer you're looking for? Please contact our friendly team directly.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a 
+                href="tel:+14161234567" 
+                className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300"
+              >
+                <svg className="w-5 h-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span className="text-gray-900 dark:text-white">Call us</span>
+              </a>
+              <a 
+                href="mailto:info@dingzzmarketing.com" 
+                className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300"
+              >
+                <svg className="w-5 h-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="text-gray-900 dark:text-white">Email us</span>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
