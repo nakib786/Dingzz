@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-4">
             <div className="mb-6">
-              <DingzzPngLogo height={80} width={240} className="brightness-0 invert" />
+              <DingzzPngLogo height={80} width={240} forceDarkMode={true} />
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
               Your trusted partner for innovative digital and local marketing solutions that drive real results.

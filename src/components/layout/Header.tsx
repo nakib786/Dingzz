@@ -77,9 +77,7 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <div className="dark:bg-white dark:rounded-lg dark:p-2 animate-pulse hover:animate-bounce">
-              <DingzzPngLogo height={50} width={150} className="brightness-150 md:h-[100px] md:w-[300px]" />
-            </div>
+            <DingzzPngLogo height={50} width={150} className="md:h-[100px] md:w-[300px]" />
           </Link>
           
           {/* Desktop navigation with Aceternity Navbar Menu */}
