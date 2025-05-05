@@ -17,20 +17,7 @@ export function BackgroundImage({
   glowSize = 'md',
   className = '',
 }: BackgroundImageProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
+  // Removed unused isMobile state
 
   // Define glow sizes
   const glowSizes = {
