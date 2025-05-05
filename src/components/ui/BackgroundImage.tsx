@@ -1,4 +1,4 @@
-// Remove imports since they're unused
+import { useEffect, useState } from 'react';
 
 interface BackgroundImageProps {
   imagePath: string;
@@ -17,7 +17,20 @@ export function BackgroundImage({
   glowSize = 'md',
   className = '',
 }: BackgroundImageProps) {
-  // Removed unused isMobile state
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   // Define glow sizes
   const glowSizes = {

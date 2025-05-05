@@ -117,12 +117,14 @@ export const ProductItem = ({
   title,
   description,
   to,
-  src
+  src,
+  darkModeStyles = ''
 }: {
   title: string;
   description: string;
   to: string;
   src: string;
+  darkModeStyles?: string;
 }) => {
   const [imgError, setImgError] = useState(false);
   const { theme } = useTheme();
