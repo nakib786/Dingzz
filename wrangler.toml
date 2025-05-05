@@ -1,0 +1,16 @@
+# Wrangler configuration for Cloudflare Pages
+name = "dingzz-marketing"
+compatibility_date = "2023-06-02"
+
+[site]
+bucket = "./dist"
+
+[env.production]
+name = "dingzz-marketing-prod"
+
+[env.development]
+name = "dingzz-marketing-dev"
+
+# Configure environment
+[vars]
+NODE_VERSION = "20" 

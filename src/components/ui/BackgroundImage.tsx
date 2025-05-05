@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+// Remove imports since they're unused
 
 interface BackgroundImageProps {
   imagePath: string;
