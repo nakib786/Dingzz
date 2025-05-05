@@ -2,6 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 
+// Set environment variable to use SWC WASM
+process.env.SWC_USE_WASM = '1'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
