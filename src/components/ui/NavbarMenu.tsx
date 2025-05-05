@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { BackgroundPaths } from "./background-paths";
+import logo from '../../assets/images/dingzz-logo.png';
+import { useTheme } from "../../lib/ThemeContext";
+
+// Dark mode styles component
+const DarkModeStyles = () => {
+  useEffect(() => {
+    const darkModeLogoStyle = document.createElement('style');
+    darkModeLogoStyle.innerHTML = `
+      /* ONLY apply in dark mode - never affect light mode */
+      @media (prefers-color-scheme: dark) {
+        img[src*="home-thumbnail"] {
+          filter: brightness(0) invert(1) !important;
+        }
+      }
+      
+      /* ONLY apply to elements with dark mode class - never affect light mode */
+      html.dark img[src*="home-thumbnail"],
+      .dark img[src*="home-thumbnail"],
+      html[data-theme="dark"] img[src*="home-thumbnail"] {
+        filter: brightness(0) invert(1) !important;
+      }
+      
+      /* Ensure no filter in light mode */
+      img[src*="home-thumbnail"] {
+        filter: none !important;
+      }
+    `;
+    document.head.appendChild(darkModeLogoStyle);
+    
+    return () => {
+      document.head.removeChild(darkModeLogoStyle);
+    };
+  }, []);
+  
+  return null;
+};
 
 const transition = {
   type: "spring",
@@ -41,11 +77,11 @@ export const MenuItem = ({
             <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4 z-50">
               <motion.div
                 transition={transition}
-                layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-gray-800 backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                layoutId="active"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl overflow-hidden border border-black/[0.05] dark:border-white/[0.05] shadow-lg"
               >
                 <motion.div
-                  layout // layout ensures smooth animation
+                  layout
                   className="w-max h-full p-4"
                 >
                   {children}
@@ -69,8 +105,9 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full border border-transparent dark:bg-gray-800 dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-10 px-12 py-7"
+      className="relative flex justify-center space-x-10 px-12 py-7"
     >
+      <DarkModeStyles />
       {children}
     </nav>
   );
@@ -81,20 +118,39 @@ export const ProductItem = ({
   description,
   to,
   src,
+  darkModeStyles = ''
 }: {
   title: string;
   description: string;
   to: string;
   src: string;
+  darkModeStyles?: string;
 }) => {
+  const [imgError, setImgError] = useState(false);
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
+  
+  // For home thumbnail, only apply special handling in dark mode
+  const isHomeThumbnail = src.includes('home-thumbnail');
+  
+  // Use original source by default
+  const finalSrc = imgError ? logo : src;
+  
+  // Only apply filter in dark mode - never in light mode
+  const imageStyle = isDarkMode && isHomeThumbnail ? 
+    { filter: 'brightness(0) invert(1)' } : 
+    { filter: 'none' };
+  
   return (
-    <Link to={to} className="flex space-x-2">
+    <Link to={to} className="flex items-center space-x-3">
       <img
-        src={src}
+        src={finalSrc}
         width={140}
         height={70}
         alt={title}
-        className="flex-shrink-0 rounded-md shadow-2xl"
+        className="w-[140px] h-[70px] object-contain"
+        style={imageStyle}
+        onError={() => setImgError(true)}
       />
       <div>
         <h4 className="text-xl font-bold mb-1 text-black dark:text-white">

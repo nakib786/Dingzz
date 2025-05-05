@@ -26,6 +26,25 @@ export default {
         'xl': '1rem',
         '2xl': '1.5rem',
       },
+      keyframes: {
+        aurora: {
+          '0%': {
+            transform: 'translate(-50%, -50%) rotate(0deg) scale(2)',
+            opacity: 0.3
+          },
+          '50%': {
+            opacity: 0.4
+          },
+          '100%': {
+            transform: 'translate(-50%, -50%) rotate(360deg) scale(2)',
+            opacity: 0.3
+          }
+        }
+      },
+      animation: {
+        'aurora': 'aurora 15s linear infinite',
+        'aurora-slow': 'aurora 25s linear infinite'
+      }
     },
   },
   plugins: [],

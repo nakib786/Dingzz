@@ -35,11 +35,13 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
     };
   }, []);
 
-  // Adjust rows based on viewport
-  const itemsPerRow = isMobile ? 2 : 5;
-  const firstRow = items.slice(0, itemsPerRow);
-  const secondRow = items.slice(itemsPerRow, itemsPerRow * 2);
-  const thirdRow = items.slice(itemsPerRow * 2, itemsPerRow * 3);
+  // Adjust rows based on viewport and ensure there are enough items
+  const itemsPerRow = isMobile ? 5 : 5; // Increased from 4 to 5 for mobile to fill screen better
+  const safeItems = items.length >= itemsPerRow * 4 ? items : [...items, ...items].slice(0, itemsPerRow * 4);
+  const firstRow = safeItems.slice(0, itemsPerRow);
+  const secondRow = safeItems.slice(itemsPerRow, itemsPerRow * 2);
+  const thirdRow = safeItems.slice(itemsPerRow * 2, itemsPerRow * 3);
+  const fourthRow = isMobile ? safeItems.slice(itemsPerRow * 3, itemsPerRow * 4) : [];
   
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -50,7 +52,7 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
   // Adjust animation values for mobile
-  const translateXValue = isMobile ? 400 : 1000;
+  const translateXValue = isMobile ? 300 : 1000;
   
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, translateXValue]),
@@ -61,19 +63,19 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
     springConfig
   );
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [isMobile ? 5 : 15, 0]),
+    useTransform(scrollYProgress, [0, 0.2], [isMobile ? 3 : 15, 0]),
     springConfig
   );
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
+    useTransform(scrollYProgress, [0, 0.2], [isMobile ? 0.6 : 0.2, 1]),
     springConfig
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [isMobile ? 5 : 20, 0]),
+    useTransform(scrollYProgress, [0, 0.2], [isMobile ? 2 : 20, 0]),
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [isMobile ? -50 : -700, isMobile ? 50 : 500]),
+    useTransform(scrollYProgress, [0, 0.2], [isMobile ? -20 : -700, isMobile ? 80 : 500]),
     springConfig
   );
 
@@ -100,12 +102,11 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
           opacity,
           position: 'relative',
           zIndex: 0,
-          pointerEvents: 'none',
-          marginTop: isMobile ? '200px' : '400px'
+          marginTop: isMobile ? '160px' : '400px'
         }}
         className="relative"
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-4 md:space-x-20 mb-4 md:mb-20 overflow-x-hidden">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-2 md:space-x-20 mb-4 md:mb-20 overflow-x-hidden">
           {firstRow.map((item) => (
             <GalleryCard
               item={item}
@@ -115,7 +116,7 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row mb-4 md:mb-20 space-x-4 md:space-x-20 overflow-x-hidden">
+        <motion.div className="flex flex-row mb-4 md:mb-20 space-x-2 md:space-x-20 overflow-x-hidden">
           {secondRow.map((item) => (
             <GalleryCard
               item={item}
@@ -125,7 +126,7 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-4 md:space-x-20 overflow-x-hidden">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-2 md:space-x-20 mb-4 md:mb-0 overflow-x-hidden">
           {thirdRow.map((item) => (
             <GalleryCard
               item={item}
@@ -135,6 +136,20 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
             />
           ))}
         </motion.div>
+        
+        {/* Fourth row only for mobile */}
+        {isMobile && (
+          <motion.div className="flex flex-row space-x-2 overflow-x-hidden">
+            {fourthRow.map((item) => (
+              <GalleryCard
+                item={item}
+                translate={translateXReverse}
+                key={item.title}
+                isMobile={isMobile}
+              />
+            ))}
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );
@@ -142,23 +157,28 @@ export const HeroGalleryScroll = ({ items }: HeroGalleryScrollProps) => {
 
 const HeroHeader = ({ isMobile }: { isMobile: boolean }) => {
   return (
-    <div className={`max-w-7xl relative mx-auto ${isMobile ? 'py-6 mb-10' : 'py-10 md:py-20 lg:py-40'} px-4 w-full left-0 top-0 z-20`}>
-      <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-gray-900 dark:text-gray-100">
-        Transform Your <br className="hidden sm:block" /> Digital Presence
+    <div className={`max-w-7xl relative mx-auto ${isMobile ? 'py-8 mb-8' : 'py-10 md:py-20 lg:py-40'} px-4 w-full left-0 top-0 z-20`}>
+      {/* Mobile gradient background */}
+      {isMobile && (
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/40 dark:from-gray-900/90 dark:to-gray-900/40 -z-10 rounded-xl"></div>
+      )}
+      
+      <h1 className={`text-4xl sm:text-5xl md:text-7xl font-bold ${isMobile ? 'bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-purple-600 dark:from-indigo-400 dark:to-purple-400 leading-tight' : 'text-gray-900 dark:text-gray-100'}`}>
+        Transform Your <br className={isMobile ? 'block' : 'hidden sm:block'} /> Digital Presence
       </h1>
-      <p className={`max-w-2xl text-base md:text-xl ${isMobile ? 'mt-2' : 'mt-4 md:mt-8'} text-gray-600 dark:text-gray-400`}>
+      <p className={`max-w-2xl text-base md:text-xl ${isMobile ? 'mt-3 font-medium' : 'mt-4 md:mt-8'} ${isMobile ? 'text-gray-700' : 'text-gray-600'} dark:text-gray-400`}>
         Innovative marketing solutions crafted to elevate your brand, expand your reach, and drive meaningful growth.
       </p>
-      <div className={`flex flex-wrap gap-4 ${isMobile ? 'mt-4' : 'mt-6 md:mt-8'} relative`} style={{ zIndex: 100, pointerEvents: 'auto' }}>
+      <div className={`flex flex-wrap gap-3 ${isMobile ? 'mt-6' : 'mt-6 md:mt-8'} relative`} style={{ zIndex: 100, pointerEvents: 'auto' }}>
         <a 
           href="/services" 
-          className="bg-indigo-600 text-white hover:bg-indigo-700 font-medium shadow-md px-4 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base cursor-pointer"
+          className={`bg-indigo-600 text-white hover:bg-indigo-700 font-medium shadow-md px-5 sm:px-8 py-2.5 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base cursor-pointer ${isMobile ? 'flex-1 text-center' : ''}`}
         >
           Explore Services
         </a>
         <a 
           href="/contact" 
-          className="border-2 border-indigo-600 bg-white text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 hover:bg-indigo-600/10 dark:hover:bg-indigo-900/20 font-medium px-4 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base cursor-pointer"
+          className={`border-2 border-indigo-600 bg-white text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 hover:bg-indigo-600/10 dark:hover:bg-indigo-900/20 font-medium px-5 sm:px-8 py-2.5 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base cursor-pointer ${isMobile ? 'flex-1 text-center' : ''}`}
         >
           Contact Us
         </a>
@@ -179,26 +199,47 @@ const GalleryCard = ({ item, translate, isMobile }: GalleryCardProps) => {
       style={{
         x: translate,
       }}
-      whileHover={{
-        y: isMobile ? -5 : -20,
+      whileHover={!isMobile ? {
+        y: -50,
+        scale: 1.15,
+        zIndex: 50,
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      } : {
+        y: -8,
+        scale: 1.05,
+        zIndex: 10,
+        transition: { duration: 0.2 }
       }}
-      key={item.title}
-      className={`group/item ${isMobile ? 'h-24 w-20' : 'h-72 sm:h-96 w-60 sm:w-[30rem]'} relative flex-shrink-0`}
+      className={`group/item ${isMobile ? 'h-28 w-24 rounded-lg overflow-hidden' : 'h-72 sm:h-96 w-60 sm:w-[30rem]'} relative flex-shrink-0`}
     >
+      {/* Desktop custom hover effect */}
+      {!isMobile && (
+        <div className="absolute -inset-px scale-105 bg-gradient-to-br from-indigo-500 to-purple-600 opacity-0 group-hover/item:opacity-100 rounded-lg blur-sm -z-10 transition-all duration-300"></div>
+      )}
+      
       <Link
         to={item.link}
-        className="block group-hover/item:shadow-2xl"
+        className="block h-full w-full relative z-10"
       >
         <img
           src={item.thumbnail}
-          className="object-cover object-center absolute h-full w-full inset-0 rounded-lg"
+          className="object-cover object-center absolute h-full w-full inset-0 rounded-lg shadow-md"
           alt={item.title}
         />
+        {/* Gradient overlay for text visibility */}
+        <div className={`absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent ${isMobile ? 'opacity-80' : 'opacity-60'} rounded-lg`}></div>
+
+        {/* Hover overlay effect - only applied for desktop */}
+        {!isMobile && (
+          <div className="absolute inset-0 h-full w-full opacity-0 group-hover/item:opacity-75 bg-gradient-to-br from-white/90 to-indigo-100/90 dark:from-indigo-900/90 dark:to-purple-900/90 rounded-lg transition-all duration-500"></div>
+        )}
+        
+        {/* Title always visible but with pointer-events-none */}
+        <h2 className={`absolute ${isMobile ? 'bottom-1.5 left-1.5 text-[10px] leading-tight' : 'bottom-6 left-6 text-base sm:text-xl'} font-medium text-white group-hover/item:text-indigo-800 dark:group-hover/item:text-indigo-200 transition-all duration-300 z-10 pointer-events-none`}>
+          {item.title}
+        </h2>
       </Link>
-      <div className="absolute inset-0 h-full w-full opacity-0 group-hover/item:opacity-80 bg-white/80 dark:bg-gray-900/80 pointer-events-none rounded-lg transition-opacity duration-300"></div>
-      <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/item:opacity-100 text-indigo-600 dark:text-indigo-400 font-medium text-xs sm:text-lg transition-opacity duration-300">
-        {item.title}
-      </h2>
     </motion.div>
   );
 };
