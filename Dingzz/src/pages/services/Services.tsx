@@ -10,7 +10,7 @@ const serviceData = [
     slug: "digital-marketing",
     title: "Digital Marketing",
     description: "Our digital marketing services are designed to increase your online visibility, drive traffic to your website, and generate quality leads.",
-    icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+    icon: "M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25",
     items: [
       { title: "Search Engine Optimization (SEO)", text: "Improve your website's visibility in search engine results to drive organic traffic." },
       { title: "Pay-Per-Click Advertising (PPC)", text: "Targeted ad campaigns to reach potential customers and drive conversions." },
@@ -36,9 +36,9 @@ const serviceData = [
     slug: "content-marketing",
     title: "Content Marketing",
     description: "Our content marketing services help you create and distribute valuable content to attract and engage your target audience.",
-    icon: "M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z",
+    icon: "M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10",
     items: [
-      { title: "Blog Writing", text: "High-quality blog content to engage your audience and improve SEO." },
+      { title: "Blog Writing", text: "Engaging blog posts to establish thought leadership and drive traffic." },
       { title: "Video Production", text: "Engaging video content to showcase your products and services." },
       { title: "Infographics", text: "Visual content to communicate complex information in an engaging way." },
       { title: "Content Strategy", text: "Comprehensive planning to align content with business goals and audience needs." }
@@ -49,7 +49,7 @@ const serviceData = [
     slug: "analytics",
     title: "Analytics & Reporting",
     description: "Our analytics services help you understand your marketing performance and make data-driven decisions to improve results.",
-    icon: "M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+    icon: "M3.75 3v11.25A2.25 2.25 0 006 16.5h12A2.25 2.25 0 0020.25 14.25V3M3.75 21h16.5M16.5 3.75h.008v.008h-.008v-.008zM12.75 3.75h.008v.008h-.008v-.008zM9 3.75h.008v.008H9v-.008z",
     items: [
       { title: "Marketing Dashboard Setup", text: "Custom dashboards to track and visualize your marketing performance." },
       { title: "Performance Reporting", text: "Regular reports with insights on your marketing campaigns." },
@@ -182,8 +182,8 @@ const Services = () => {
                   serviceData.slice(0, 4).map((feature, index) => (
                     <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                       <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-4">
-                        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={feature.icon.split(' ')[0]} />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
                         </svg>
                       </div>
                       <h3 className="text-white font-semibold mb-2">{feature.title}</h3>
@@ -210,8 +210,22 @@ const Services = () => {
               >
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 md:w-7 md:h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={currentService.icon.split(' ')[0]} />
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-7 md:h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      {currentService.slug === "digital-marketing" && (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                      )}
+                      {currentService.slug === "local-marketing" && (
+                        <>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </>
+                      )}
+                      {currentService.slug === "content-marketing" && (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                      )}
+                      {currentService.slug === "analytics" && (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      )}
                     </svg>
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">{currentService.title}</h2>
@@ -280,8 +294,22 @@ const Services = () => {
                   >
                     <div className="flex flex-col h-full">
                       <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-6">
-                        <svg className="w-6 h-6 md:w-7 md:h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={service.icon.split(' ')[0]} />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-7 md:h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          {service.slug === "digital-marketing" && (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                          )}
+                          {service.slug === "local-marketing" && (
+                            <>
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </>
+                          )}
+                          {service.slug === "content-marketing" && (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                          )}
+                          {service.slug === "analytics" && (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          )}
                         </svg>
                       </div>
                       <h2 className="text-xl md:text-2xl font-bold mb-3 text-gray-900 dark:text-white">{service.title}</h2>

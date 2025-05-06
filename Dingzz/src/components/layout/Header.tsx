@@ -163,7 +163,7 @@ const Header = () => {
               </MenuItem>
               <div className="ml-6">
                 <a 
-                  href="tel:+15551234567" 
+                  href="tel:2508793555" 
                   className="px-5 py-2 bg-primary text-white rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm"
                 >
                   Call Us
@@ -309,7 +309,7 @@ const Header = () => {
                   variants={menuItemVariants}
                 >
                   <a 
-                    href="tel:+15551234567" 
+                    href="tel:2508793555" 
                     className="flex items-center justify-center w-full py-3 bg-white/20 backdrop-blur-md text-white rounded-lg font-medium shadow-sm hover:bg-white/30 transition-all"
                   >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -50,7 +50,7 @@ const About = () => {
       </section>
 
       {/* Our Story */}
-      <section className="py-16 md:py-24 bg-white dark:bg-gray-900 relative z-10">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 relative z-10">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div 
@@ -80,9 +80,9 @@ const About = () => {
               className="flex justify-center px-4"
             >
               <img 
-                src="https://placehold.co/600x400/e4e4e7/4f46e5?text=Our+Story&font=montserrat" 
-                alt="Our Story" 
-                className="rounded-2xl shadow-soft border border-gray-100 dark:border-gray-700 w-full"
+                src="https://picsum.photos/seed/ourstory/600/400" 
+                alt="Our Story Background" 
+                className="rounded-2xl shadow-soft border border-gray-100 dark:border-gray-700 w-full object-cover h-full min-h-[300px] md:min-h-[400px]"
               />
             </motion.div>
           </div>
@@ -135,7 +135,15 @@ const About = () => {
               >
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                   <svg className="w-6 h-6 md:w-7 md:h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={value.icon} />
+                    {value.title === "Integrity" && (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    )}
+                    {value.title === "Innovation" && (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    )}
+                    {value.title === "Client Success" && (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    )}
                   </svg>
                 </div>
                 <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 dark:text-white">{value.title}</h3>
@@ -148,31 +156,55 @@ const About = () => {
         </div>
       </section>
       
-      {/* Call to Action */}
-      <section className="py-12 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 opacity-95"></div>
-        <div className="absolute inset-0 opacity-20 dark:opacity-30" style={{ backgroundImage: "url('https://placehold.co/1920x1080/e4e4e7/4f46e5?text=&font=montserrat')", backgroundSize: 'cover' }}></div>
-        <div className="container-custom relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+      {/* Still Have Questions Section */}
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-900 relative z-10">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center px-4"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 rounded-2xl p-8 md:p-10 max-w-4xl mx-auto relative overflow-hidden"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-white">Ready to Grow Your Business?</h2>
-            <p className="text-indigo-100 dark:text-indigo-50 max-w-2xl mx-auto mb-6 md:mb-10 text-sm md:text-lg">
-              Get in touch with us today to discuss how we can help you achieve your marketing goals.
-            </p>
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center btn bg-white text-primary hover:bg-indigo-50 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 font-medium shadow-sm px-6 sm:px-8 py-2 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
-            >
-              Let's Talk
-              <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </Link>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-indigo-700 dark:from-indigo-900 dark:to-indigo-800 opacity-95"></div>
+            
+            <div className="absolute inset-0 opacity-40" style={{ 
+              backgroundImage: "url('/images/backgrounds/abstract-tech-2.svg')", 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center'
+            }}></div>
+            
+            <div className="relative z-10">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">Still have questions?</h3>
+              <p className="text-indigo-100 mb-6 max-w-lg mx-auto">
+                Want to learn more about our team, our approach, or how we can help your business? Get in touch with us.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a 
+                  href="tel:2508793555" 
+                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-primary hover:bg-indigo-50 shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  <svg className="w-5 h-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>Call us</span>
+                </a>
+                <a 
+                  href="mailto:info@dingzzmarketing.com" 
+                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-primary hover:bg-indigo-50 shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  <svg className="w-5 h-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span>Email us</span>
+                </a>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
