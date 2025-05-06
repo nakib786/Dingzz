@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "npm list || true",
-    "build": "tsc -b || true && npx vite build",
+    "build": "tsc -b || true && node ./node_modules/vite/bin/vite.js build",
     "vercel-build": "npm install && npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
