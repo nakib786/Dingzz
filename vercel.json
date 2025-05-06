@@ -3,5 +3,8 @@
   "buildCommand": "chmod +x deploy.sh && ./deploy.sh",
   "installCommand": "echo 'Using custom build process'",
   "framework": "vite",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 } 
