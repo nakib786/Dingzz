@@ -1,6 +1,0 @@
-{
-  "buildCommand": "node vercel-scripts.js",
-  "installCommand": "echo 'Using custom build process'",
-  "framework": null,
-  "outputDirectory": "dist"
-} 
