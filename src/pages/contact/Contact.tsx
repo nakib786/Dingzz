@@ -60,7 +60,7 @@ const Contact = () => {
         },
         {
           question: "How often will we communicate during projects?",
-          answer: "Communication frequency depends on your preference and the project scope. Typically, we schedule weekly or bi-weekly check-ins for active campaigns, plus monthly strategy reviews. You'll have a dedicated account manager available for questions and emergencies. We use project management tools that give you 24/7 access to project updates."
+          answer: "Communication frequency depends on your preference and the project scope. Typically, we schedule weekly or bi-weekly check-ins for active campaigns, plus monthly strategy reviews. You'll have a dedicated account manager available for questions via email. We use project management tools that give you 24/7 access to project updates."
         }
       ]
     },
@@ -126,7 +126,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     // Send form data to FormSubmit.co
-    fetch('https://formsubmit.co/ajax/faizan.faruqui@gmail.com', {
+    fetch('https://formsubmit.co/ajax/info@dingzz.ca', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const Contact = () => {
       body: JSON.stringify({
         name: formState.name,
         email: formState.email,
-        phone: formState.phone || 'Not provided',
+        phone: 'Not provided', // Always set to not provided while phone field is hidden
         company: formState.company || 'Not provided',
         service: formState.service || 'Not specified',
         message: formState.message,
@@ -143,7 +143,7 @@ const Contact = () => {
         _template: "table",
         _autoresponse: "Thank you for contacting Dingzz. We've received your message and will get back to you shortly.",
         _captcha: "true",
-        _cc: "faizan.faruqui@gmail.com"
+        _cc: "info@dingzz.ca"
       })
     })
     .then(response => response.json())
@@ -226,7 +226,8 @@ const Contact = () => {
                   {
                     icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
                     title: "Phone",
-                    content: "2508793555"
+                    content: "2508793555",
+                    hidden: true
                   },
                   {
                     icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
@@ -234,7 +235,7 @@ const Contact = () => {
                     content: "info@dingzz.ca"
                   }
                 ].map((item, index) => (
-                  <div key={index} className="flex items-start">
+                  <div key={index} className={`flex items-start ${item.hidden ? 'hidden' : ''}`}>
                     <div className="flex-shrink-0 w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mr-4">
                       {/* Fixed SVG rendering */}
                       <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -326,7 +327,7 @@ const Contact = () => {
                         />
                       </div>
                       
-                      <div>
+                      <div className="hidden">
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Phone Number
                         </label>
@@ -395,7 +396,7 @@ const Contact = () => {
                     <input type="hidden" name="_template" value="table" />
                     <input type="hidden" name="_autoresponse" value="Thank you for contacting Dingzz. We've received your message and will get back to you shortly." />
                     <input type="hidden" name="_captcha" value="true" />
-                    <input type="hidden" name="_cc" value="faizan.faruqui@gmail.com" />
+                    <input type="hidden" name="_cc" value="info@dingzz.ca" />
                     
                     <div className="mt-8">
                       <button 
@@ -581,7 +582,7 @@ const Contact = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <a 
                   href="tel:2508793555" 
-                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-primary hover:bg-indigo-50 shadow-sm hover:shadow-md transition-all duration-300"
+                  className="hidden inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-primary hover:bg-indigo-50 shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   <svg className="w-5 h-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -589,7 +590,7 @@ const Contact = () => {
                   <span>Call us</span>
                 </a>
                 <a 
-                  href="mailto:info@dingzzmarketing.com" 
+                  href="mailto:info@dingzz.ca" 
                   className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-primary hover:bg-indigo-50 shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   <svg className="w-5 h-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">

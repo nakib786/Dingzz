@@ -1,0 +1,63 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#F472B6" />
+      <stop offset="25%" stopColor="#EC4899" />
+      <stop offset="50%" stopColor="#8B5CF6" />
+      <stop offset="75%" stopColor="#3B82F6" />
+      <stop offset="100%" stopColor="#0EA5E9" />
+    </linearGradient>
+    
+    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#FCD34D" />
+      <stop offset="50%" stopColor="#FB923C" />
+      <stop offset="100%" stopColor="#F43F5E" />
+    </linearGradient>
+    
+    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#10B981" />
+      <stop offset="100%" stopColor="#34D399" />
+    </linearGradient>
+    
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stopColor="white" />
+      <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+    </radialGradient>
+    
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Vibrant background with rounded corners -->
+  <rect width="64" height="64" rx="16" fill="url(#rainbowGradient)" />
+  
+  <!-- Decorative elements -->
+  <circle cx="14" cy="14" r="3" fill="#FEF3C7" opacity="0.8" />
+  <circle cx="50" cy="14" r="3" fill="#BAE6FD" opacity="0.8" />
+  <circle cx="14" cy="50" r="3" fill="#FBCFE8" opacity="0.8" />
+  <circle cx="50" cy="50" r="3" fill="#A7F3D0" opacity="0.8" />
+  
+  <!-- Stylized Letter D -->
+  <path d="M18 18V46H32C38 46 44 38 44 32C44 26 38 18 32 18H18Z" fill="white" filter="url(#softGlow)" />
+  
+  <!-- Marketing Arrow Elements -->
+  <path d="M26 40L32 34L38 40" stroke="url(#chartGradient)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  <path d="M26 34L32 28L38 34" stroke="url(#arrowGradient)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  
+  <!-- Colorful Bar Charts -->
+  <rect x="28" y="42" width="3" height="6" rx="1.5" fill="#F87171" />
+  <rect x="32" y="40" width="3" height="8" rx="1.5" fill="#FBBF24" />
+  <rect x="36" y="38" width="3" height="10" rx="1.5" fill="#4ADE80" />
+  <rect x="40" y="36" width="3" height="12" rx="1.5" fill="#38BDF8" />
+  
+  <!-- Center Highlight -->
+  <circle cx="32" cy="32" r="6" fill="url(#centerGlow)" opacity="0.7" />
+  
+  <!-- Connecting Lines -->
+  <path d="M32 26L48 26" stroke="white" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
+  <path d="M32 38L48 38" stroke="white" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
+  <path d="M20 32L44 32" stroke="white" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
+</svg> 

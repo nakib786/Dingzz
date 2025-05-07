@@ -161,7 +161,7 @@ const Header = () => {
                   </HoveredLink>
                 </div>
               </MenuItem>
-              <div className="ml-6">
+              <div className="ml-6 hidden">
                 <a 
                   href="tel:2508793555" 
                   className="px-5 py-2 bg-primary text-white rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm"
@@ -305,7 +305,7 @@ const Header = () => {
                 </nav>
                 
                 <motion.div 
-                  className="p-4 border-t border-white/20"
+                  className="p-4 border-t border-white/20 hidden"
                   variants={menuItemVariants}
                 >
                   <a 

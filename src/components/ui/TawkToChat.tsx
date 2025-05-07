@@ -27,26 +27,22 @@ const TawkToChat = () => {
       document.head.appendChild(s1);
     }
 
-    // Check if device is mobile
-    const checkIfMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    };
-
     // Configure Tawk.to when it's ready
     const configureChat = () => {
       if (window.Tawk_API && window.Tawk_API.onLoad) {
         window.Tawk_API.onLoad = function() {
-          // If on mobile, hide the auto popup but keep the chat bubble visible
-          if (checkIfMobile()) {
-            // Disable automatic popup on mobile
-            window.Tawk_API.hideWidget();
-            
-            // After a short delay, show just the widget without the popup
-            setTimeout(() => {
-              window.Tawk_API.showWidget();
-              // Disable the auto popup permanently for this session
-              window.Tawk_API.disablePopups();
-            }, 100);
+          // Allow tawk.to to fully load and scan the site
+          window.Tawk_API.showWidget();
+          
+          // Enable crawler and scanning functionality
+          if (window.Tawk_API.setAttributes) {
+            window.Tawk_API.setAttributes({
+              // Allow tawk.to to scan and crawl the website
+              'allow-crawling': true,
+              'enable-scanning': true
+            }, function(error: unknown) {
+              console.log('Tawk.to attributes set', error);
+            });
           }
         };
       } else {
@@ -58,24 +54,12 @@ const TawkToChat = () => {
     // Start the configuration process
     configureChat();
 
-    // Handle window resize (if user rotates device or resizes browser)
-    const handleResize = () => {
-      if (window.Tawk_API) {
-        if (checkIfMobile()) {
-          window.Tawk_API.disablePopups();
-        }
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
     // Clean up function
     return () => {
-      // Remove the script and event listener if component unmounts
+      // Remove the script if component unmounts
       if (s1 && s1.parentNode) {
         s1.parentNode.removeChild(s1);
       }
-      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

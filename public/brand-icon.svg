@@ -1,0 +1,61 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FF4D4D" />
+      <stop offset="50%" stopColor="#4F46E5" />
+      <stop offset="100%" stopColor="#7C3AED" />
+    </linearGradient>
+    
+    <linearGradient id="letterDGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FB7185" />
+      <stop offset="100%" stopColor="#FDA4AF" />
+    </linearGradient>
+    
+    <linearGradient id="arrowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#818CF8" />
+    </linearGradient>
+    
+    <linearGradient id="arrowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#34D399" />
+      <stop offset="100%" stopColor="#22D3EE" />
+    </linearGradient>
+    
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="neonGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feFlood flood-color="#FBCFE8" flood-opacity="0.5" result="flood"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="mask"/>
+      <feGaussianBlur in="mask" stdDeviation="1" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Base circle with colorful gradient -->
+  <circle cx="24" cy="24" r="24" fill="url(#primaryGradient)" />
+  
+  <!-- Decorative ring -->
+  <circle cx="24" cy="24" r="21" stroke="#F0ABFC" stroke-width="1" stroke-dasharray="2 2" opacity="0.7" />
+  
+  <!-- Letter D combined with chart elements -->
+  <g filter="url(#glow)">
+    <!-- Stylized D with fill -->
+    <path d="M14 12V36H24C30 36 36 30 36 24C36 18 30 12 24 12H14Z" fill="url(#letterDGradient)" stroke="white" stroke-width="1.5" />
+    
+    <!-- Growth arrow with gradients -->
+    <path d="M19 28L24 23L29 28" stroke="url(#arrowGradient1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#neonGlow)" />
+    <path d="M19 22L24 17L29 22" stroke="url(#arrowGradient2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#neonGlow)" />
+    
+    <!-- Bright center dot -->
+    <circle cx="24" cy="24" r="3" fill="#FEF3C7" />
+  </g>
+  
+  <!-- Decorative sparkles -->
+  <circle cx="10" cy="14" r="1.5" fill="#FBBF24" />
+  <circle cx="38" cy="16" r="1.5" fill="#60A5FA" />
+  <circle cx="36" cy="34" r="1.5" fill="#34D399" />
+  <circle cx="12" cy="36" r="1.5" fill="#F472B6" />
+</svg> 

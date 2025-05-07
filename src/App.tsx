@@ -7,6 +7,7 @@ import './App.css'
 const Header = lazy(() => import('./components/layout/Header'))
 const Footer = lazy(() => import('./components/layout/Footer'))
 const TawkToChat = lazy(() => import('./components/ui/TawkToChat'))
+const ScrollToTop = lazy(() => import('./components/ui/ScrollToTop'))
 
 // Pages
 const Home = lazy(() => import('./pages/home/Home'))
@@ -22,6 +23,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen overflow-fix">
           <Suspense fallback={<div className="container-custom py-4 md:py-8 text-center">Loading...</div>}>
             <Header />
